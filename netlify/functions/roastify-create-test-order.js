@@ -45,33 +45,7 @@ exports.handler = async function () {
         status: response.status,
         selectedGrind: grind,
         selectedSku: sku,
-        data
-      })
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        ok: false,
-        message: error.message
-      })
-    };
-  }
-};          }
-        ]
-      })
-    });
-
-    const data = await response.json();
-
-    return {
-      statusCode: response.status,
-      body: JSON.stringify({
-        ok: response.ok,
-        status: response.status,
-        selectedGrind: grind,
-        selectedSku: sku,
-        data
+        data: data
       })
     };
   } catch (error) {
