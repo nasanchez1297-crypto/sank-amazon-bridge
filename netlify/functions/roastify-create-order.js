@@ -65,61 +65,6 @@ exports.handler = async (event) => {
       },
       items: [
         {
-          sku,
-          artworkUrl: body.artworkUrl || "https://sankcoffee-connect.netlify.app/test.jpg",
-          quantity
-        }
-      ]
-    };
-
-    const response = await fetch("https://api.roastify.app/v1/orders", {
-      method: "POST",
-      headers: {
-        "x-api-key": process.env.ROASTIFY_API_KEY_TEST,
-        "Content-Type": "application/json",
-        "Idempotency-Key": body.idempotencyKey || `manual-${Date.now()}`
-      },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await response.json();
-
-    return {
-      statusCode: response.status,
-      headers,
-      body: JSON.stringify({
-        ok: response.ok,
-        status: response.status,
-        selectedGrind: grind,
-        selectedSku: sku,
-        payloadSent: payload,
-        data
-      })
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({
-        ok: false,
-        message: error.message
-      })
-    };
-  }
-};      toAddress: {
-        name: body.name || "Nicolas Sanchez",
-        company: body.company || "SANK Coffee",
-        street1: body.street1 || "1337 W 49th Pl Apt 408",
-        street2: body.street2 || "",
-        city: body.city || "Hialeah",
-        state: body.state || "FL",
-        zip: body.zip || "33012",
-        country: body.country || "US",
-        phone: body.phone || "7865551234",
-        email: body.email || "test@example.com"
-      },
-      items: [
-        {
           sku: sku,
           artworkUrl: body.artworkUrl || "https://sankcoffee-connect.netlify.app/test.jpg",
           quantity: quantity
@@ -141,6 +86,7 @@ exports.handler = async (event) => {
 
     return {
       statusCode: response.status,
+      headers,
       body: JSON.stringify({
         ok: response.ok,
         status: response.status,
@@ -153,6 +99,7 @@ exports.handler = async (event) => {
   } catch (error) {
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({
         ok: false,
         message: error.message
